@@ -1,0 +1,36 @@
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/figtree';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-paper font-sans text-ink antialiased; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight; }
+  :focus-visible { outline: 3px solid #167D7A; outline-offset: 2px; border-radius: 6px; }
+  .on-dark :focus-visible { outline-color: #D9C69A; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-5 sm:px-8; }
+  .section { @apply py-16 sm:py-24; }
+  .input { @apply w-full rounded-lg border border-ink/25 bg-white px-3.5 py-2.5 text-base text-ink placeholder:text-muted/70 focus:border-lagoon; }
+  .input[aria-invalid='true'] { @apply border-hibiscus; }
+  /* Price-tag card: the one distinctive device. The hole and perforation encode "starting rate". */
+  .rate-tag { @apply relative flex flex-col rounded-tag border border-ink/15 bg-white; }
+  .rate-tag::before { content: ''; @apply absolute right-4 top-3.5 h-2.5 w-2.5 rounded-full border border-ink/25 bg-paper; }
+  .rate-tag-foot { @apply mt-auto flex items-end justify-between border-t border-dashed border-ink/30 px-5 py-4; }
+}
+
+/* The one page-load moment: hero lines settle in. */
+@keyframes settle { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.settle { animation: settle 700ms cubic-bezier(.2,.7,.2,1) both; }
+.settle-2 { animation-delay: 140ms; }
+.settle-3 { animation-delay: 280ms; }
+@keyframes drop { from { opacity: 0; transform: translateY(-18px) rotate(var(--r, 0deg)); } to { opacity: 1; transform: rotate(var(--r, 0deg)); } }
+.drop { animation: drop 800ms cubic-bezier(.2,.8,.2,1) both; }
